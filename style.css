@@ -1,5 +1,5 @@
 body {
-    background-color: #105f8a;
+    background-color: #FFF;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     display: flex;
@@ -7,30 +7,102 @@ body {
     min-height: 100vh;
 }
 
+a {
+    text-decoration: none;
+}
+
 .header {
-    background-color: #0b405c;
+    /* background-color: #0b405c; */
+    border-top: 10px solid #37138F;
     padding: 15px;
 }
 
 .title {
     margin: 0;
+    color: #37138F;
+    text-align: center;
 }
 
 .content {
     flex: 1;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
 }
 
 .dates {
-    border: 3px solid black;
-    border-radius: 5px;    
+    /* border: 3px solid black; */
+    /* border-radius: 5px;*/
     padding: 15px;
     margin: 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+    justify-content: space-between;
+}
+
+.calendarLabel {
+    width: 40px;
+    text-align: right;
+}
+
+.calendarSelect {
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid black; */
+}
+
+.calendarDropDown {
+    min-width: 612px;
+    margin-left: 10px;
+}
+
+.dateInput {
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    /* border: 2px solid black; */
+}
+
+.inputField {
+    width: 155px;
+    padding: 0;
+    margin: 0;
+}
+
+.convert {
+    display: flex;
+    justify-content: center;
+}
+
+.convertButton {
+    background-color: #37138F;
+    border: none;
+    padding: 15px 32px;
+    margin: 4px 2px;
+    text-decoration: none;    
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    width: 220px;
+    justify-self: center;
 }
 
 .footer {
-    background-color: #0b405c;
+    /* background-color: #0b405c; */
     margin: 0;
     padding: 10px;
-    text-align: center;
-    font-weight: bold;
+    /* text-align: center; */
+    font-weight: bold;    
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.tempLogo {
+    font-weight: 700;
+    font-size: xx-large;
+    margin: 0;
 }
