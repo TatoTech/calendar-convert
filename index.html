@@ -21,44 +21,44 @@
             <div class="sourceCalendar">
                 <div class="calendarSelect">
                     <label for="sourceCalendar" class="calendarLabel">From:</label>
-                    <select name="sourceCalendar" class="calendarDropDown">
+                    <select id="sourceCalendar" name="sourceCalendar" class="calendarDropDown">
                         <option value="Gregorian">Gregorian</option>
-                        <option value="Jalaali">Jalaali</option>
-                        <option value="Hijri">Hijri</option>
+                        <!-- <option value="Jalaali">Jalaali</option> -->
+                        <!-- <option value="Hijri">Hijri</option>
                         <option value="Hebrew">Hebrew</option>
-                        <option value="Metric">Metric</option>
+                        <option value="Metric">Metric</option> -->
                     </select>
                 </div>
                 <div class="dateInput">
-                    <input type="text" name="sourceYear" value="Year" class="inputField">
-                    <input type="text" name="sourceMonth" value="Month" class="inputField">
-                    <input type="text" name="sourceDay" value="Day" class="inputField">
-                    <input type="text" name="sourceDayOfTheWeek" value="Day of the Week" class="inputField">
+                    <input type="text" id="sourceYear" name="sourceYear" value="Year" class="inputField">
+                    <input type="text" id="sourceMonth" name="sourceMonth" value="Month" class="inputField">
+                    <input type="text" id="sourceDay" name="sourceDay" value="Day" class="inputField">
+                    <input type="text" id="sourceDayOfTheWeek" name="sourceDayOfTheWeek" value="Day of the Week" class="inputField" readonly>
                 </div>
             </div>
-            <div class="destinaitonCalendar">
+            <div class="destinationCalendar">
                 <div class="calendarSelect">
-                    <label for="destinaitonCalendar" class="calendarLabel">To:</label>
-                    <select name="destinaitonCalendar" class="calendarDropDown">
-                        <option value="Gregorian">Gregorian</option>
+                    <label for="destinationCalendar" class="calendarLabel">To:</label>
+                    <select id="destinationCalendar" name="destinationCalendar" class="calendarDropDown">
+                        <!-- <option value="Gregorian">Gregorian</option> -->
                         <option value="Jalaali">Jalaali</option>
                         <option value="Hijri">Hijri</option>
-                        <option value="Hebrew">Hebrew</option>
-                        <option value="Metric">Metric</option>
+                        <!-- <option value="Hebrew">Hebrew</option> -->
+                        <!-- <option value="Metric">Metric</option> -->
                     </select>
                 </div>
                 <div class="dateInput">
-                    <input type="text" name="destinationYear" value="Year" class="inputField">
-                    <input type="text" name="destinationMonth" value="Month" class="inputField">
-                    <input type="text" name="destinationDay" value="Day" class="inputField">
-                    <input type="text" name="destinationDayOfTheWeek" value="Day of the Week" class="inputField">
+                    <input type="text" id="destinationYear" name="destinationYear" value="Year" class="inputField">
+                    <input type="text" id="destinationMonth" name="destinationMonth" value="Month" class="inputField">
+                    <input type="text" id="destinationDay" name="destinationDay" value="Day" class="inputField">
+                    <input type="text" id="destinationDayOfTheWeek" name="destinationDayOfTheWeek" value="Day of the Week" class="inputField" readonly>
                 </div>
             </div>
             <div class="convert">
-                <button class="convertButton">Start Conversion</button>
+                <button class="convertButton" onclick="startConversion()">Start Conversion</button>
             </div>
         <!-- </div> -->
-        <!-- <div class="dates">
+        <div class="dates">
             <label for="gregorianDate">Enter Gregorian Date (DD-MM-YYYY):</label>
             <input type="date" id="gregorianDate">
             <button onclick="convertDate()">Convert</button>
@@ -66,7 +66,7 @@
             <p id="hijriDate"></p>
             <p id="hebrewDate"></p>
             <p id="metricDate"></p>
-        </div> -->
+        </div>
     </div>
     <div class="footer">
         <a href="#">Contact Us</a>
