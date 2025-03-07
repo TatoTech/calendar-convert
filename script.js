@@ -31,22 +31,70 @@ function convertDate() {
 // Make it so it calculates once all 3 valid have been entered
 // All conversions currently expect input to be gregorian. Fix.
 
-function convertToJalaali(year, month, day) {
+function convertToJalaali(year, month, day, weekDay) {
+    // Convert the date to Jalaali
     const jalaaliDate = jalaali.toJalaali(year, month, day)
+
+    // Set the values in the destination fields
     document.getElementById('destinationYear').value = jalaaliDate.jy
     document.getElementById('destinationMonth').value = jalaaliDate.jm
     document.getElementById('destinationDay').value = jalaaliDate.jd
+
+    // // Calculate the Jalaali year
+    // if (month < 3 || (month === 3 && day < 21)) {
+    //     jalaaliYear = year - 622
+    // }
+    // else {
+    //     jalaaliYear = year - 621
+    // }
+
+    // // Calculate the Jalaali month
+    // monthLengths = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29]
+
+    // // Set the values in the destination fields
+    // document.getElementById('destinationYear').value = jalaaliYear
+    // document.getElementById('destinationMonth').value = jalaaliMonth
+    // document.getElementById('destinationDay').value = jalaaliDay
+
+    // Set the day of the week
+    const weekDays = ['Yekshanbeh', 'Doshanbeh', 'Seshanbeh', 'Chaharshanbeh', 'Panjshanbeh', 'Jomeh', 'Shanbeh']
+    document.getElementById('destinationDayOfTheWeek').value = weekDays[weekDay]
 }
 
-function convertToHijri(date) {
+function convertToHijri(date, weekDay) {
     const hijriDate = moment(date).format('iYYYY/iM/iD')
     const dateString = hijriDate.split('/')
     document.getElementById('destinationYear').value = dateString[0]
     document.getElementById('destinationMonth').value = dateString[1]
     document.getElementById('destinationDay').value = dateString[2]
 
-    // const test = moment(date).format('iYYYY')
-    // console.log(test)
+    const weekDays = ['Al-Ahad', 'Al-Ithnayn', 'Ath-Thulatha', 'Al-Arbaa', 'Al-Khamis', 'Al-Jumuah', 'As-Sabt']
+    document.getElementById('destinationDayOfTheWeek').value = weekDays[weekDay]
+}
+
+function convertToHebrew(date, weekDay) {
+    const hebrewDate = new Hebcal.HDate(date);
+    console.log(hebrewDate)
+    document.getElementById('destinationYear').value = hebrewDate.year
+    document.getElementById('destinationMonth').value = hebrewDate.month
+    document.getElementById('destinationDay').value = hebrewDate.day
+
+    const weekDays = ['Yom Rishon', 'Yom Sheni', 'Yom Shlishi', 'Yom Revi`i', 'Yom Khamishi', 'Yom Shishi', 'Shabbat']
+    document.getElementById('destinationDayOfTheWeek').value = weekDays[weekDay]
+}
+
+function convertToMetric(date, weekDay) {
+    const startOfYear = new Date(date.getFullYear(), 0, 1);
+    const dayOfYear = Math.floor((date - startOfYear) / (24 * 60 * 60 * 1000)) + 1;
+    const metricDate = `${date.getFullYear()}.${String(dayOfYear).padStart(3, '0')}`;
+
+    document.getElementById('destinationYear').value = metricDate
+    document.getElementById('destinationMonth').value = ''
+    document.getElementById('destinationDay').value = ''
+
+    const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    document.getElementById('destinationDayOfTheWeek').value = weekDays[weekDay]
+
 }
 
 function startConversion() {    
@@ -55,32 +103,31 @@ function startConversion() {
     const sourceMonth = Number(document.getElementById('sourceMonth').value)
     const sourceDay = Number(document.getElementById('sourceDay').value)    
     const sourceDate = new Date(sourceYear,sourceMonth,sourceYear)
-    // const sourceDate = `${sourceYear}-${sourceMonth}-${sourceDay}
 
     // Determine day of week (Gregorian only?)
     const date = new Date(sourceYear, sourceMonth - 1, sourceDay)
-    let dayOfWeek = date.getDay()
-    let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    document.getElementById('sourceDayOfTheWeek').value = daysOfWeek[dayOfWeek]
+    const weekDay = date.getDay()
+    const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    document.getElementById('sourceDayOfTheWeek').value = weekDays[weekDay]
 
     const selectedCalendar = document.getElementById("destinationCalendar").value
 
-    // Run the corresponding function
+    // Determine the caldendar to convert to
     switch (selectedCalendar) {
         case "Gregorian":
             convertToGregorian()
             break
         case "Jalaali":
-            convertToJalaali(sourceYear, sourceMonth, sourceDay)
+            convertToJalaali(sourceYear, sourceMonth, sourceDay, weekDay)
             break
         case "Hijri":
-            convertToHijri(sourceDate)
+            convertToHijri(sourceDate, weekDay)
             break
         case "Hebrew":
-            convertToHebrew()
+            convertToHebrew(date, weekDay)
             break
         case "Metric":
-            convertToMetric()
+            convertToMetric(date, weekDay)
             break
       default:
         alert("Please select a valid option.");
