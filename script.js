@@ -40,6 +40,8 @@ function convertToJalaali(year, month, day, weekDay) {
     document.getElementById('destinationMonth').value = jalaaliDate.jm
     document.getElementById('destinationDay').value = jalaaliDate.jd
 
+    //---------------------------------------------------------------
+
     // // Calculate the Jalaali year
     // if (month < 3 || (month === 3 && day < 21)) {
     //     jalaaliYear = year - 622
