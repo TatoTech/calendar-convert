@@ -31,6 +31,10 @@ a {
     align-content: center;
 }
 
+.sourceCalendar {
+    margin-bottom: 50px;
+}
+
 .dates {
     /* border: 3px solid black; */
     /* border-radius: 5px;*/
@@ -66,10 +70,21 @@ a {
 }
 
 .inputField {
+    height: 50px;
     width: 155px;
     padding: 0;
     margin: 0;
+    border-radius: 5px;
+    text-align: center;
 }
+
+.inputField::placeholder {
+    color: grey; /* Set placeholder text color */
+  }
+
+.inputField:focus::placeholder {
+    color: transparent; /* Hide placeholder text when input is focused */
+  }
 
 .convert {
     display: flex;

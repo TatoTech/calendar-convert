@@ -17,6 +17,7 @@
         <h1 class="title">Global Calendar Converter</h1>
     </div>
     <div class="content">
+        <form id="validationForm" onsubmit="return validateSourceDate()">
         <!-- <div class="dates"> -->
             <div class="sourceCalendar">
                 <div class="calendarSelect">
@@ -30,10 +31,10 @@
                     </select>
                 </div>
                 <div class="dateInput">
-                    <input type="text" id="sourceYear" name="sourceYear" value="Year" class="inputField">
-                    <input type="text" id="sourceMonth" name="sourceMonth" value="Month" class="inputField">
-                    <input type="text" id="sourceDay" name="sourceDay" value="Day" class="inputField">
-                    <input type="text" id="sourceDayOfTheWeek" name="sourceDayOfTheWeek" value="Day of the Week" class="inputField" readonly>
+                    <input type="text" id="sourceYear" name="sourceYear" placeholder="Year" class="inputField">
+                    <input type="text" id="sourceMonth" name="sourceMonth" placeholder="Month" class="inputField">
+                    <input type="text" id="sourceDay" name="sourceDay" placeholder="Day" class="inputField">
+                    <input type="text" id="sourceDayOfTheWeek" name="sourceDayOfTheWeek" placeholder="Day of the Week" class="inputField" readonly>
                 </div>
             </div>
             <div class="destinationCalendar">
@@ -48,10 +49,10 @@
                     </select>
                 </div>
                 <div class="dateInput">
-                    <input type="text" id="destinationYear" name="destinationYear" value="Year" class="inputField">
-                    <input type="text" id="destinationMonth" name="destinationMonth" value="Month" class="inputField">
-                    <input type="text" id="destinationDay" name="destinationDay" value="Day" class="inputField">
-                    <input type="text" id="destinationDayOfTheWeek" name="destinationDayOfTheWeek" value="Day of the Week" class="inputField" readonly>
+                    <input type="text" id="destinationYear" name="destinationYear" placeholder="Year" class="inputField">
+                    <input type="text" id="destinationMonth" name="destinationMonth" placeholder="Month" class="inputField">
+                    <input type="text" id="destinationDay" name="destinationDay" placeholder="Day" class="inputField">
+                    <input type="text" id="destinationDayOfTheWeek" name="destinationDayOfTheWeek" placeholder="Day of the Week" class="inputField" readonly>
                 </div>
             </div>
             <div class="convert">
@@ -67,6 +68,7 @@
             <p id="hebrewDate"></p>
             <p id="metricDate"></p>
         </div> -->
+        </form>
     </div>
     <div class="footer">
         <a href="#">Contact Us</a>

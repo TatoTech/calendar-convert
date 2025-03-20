@@ -135,3 +135,73 @@ function startConversion() {
         alert("Please select a valid option.");
     }
 }
+
+const form = document.getElementById('validationForm');
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevents the page refresh
+});
+
+// Data Validation
+function validateSourceDate() {
+    const sourceYear = document.getElementById('sourceYear').value
+    const sourceMonth = document.getElementById('sourceMonth').value
+    const sourceDay = document.getElementById('sourceDay').value
+
+    // Check year is valid
+    if (isNaN(sourceYear) || sourceYear.length !== 4) { // Update to allow for years before 1000
+        alert('Please enter a valid year')
+        // errorMessage.textContent = ''; // Set a custom error message without using alerts
+        return false
+    }
+
+    // Check month is valid
+    if (isNaN(sourceMonth) || sourceMonth.length < 1 || sourceMonth.length > 2  || sourceMonth < 1 || sourceMonth > 12) {
+        alert('Please enter a valid month')
+        // errorMessage.textContent = ''; // Set a custom error message without using alerts
+        return false
+    }
+
+    // Check day is valid
+    const DayMonths31 = [1, 3, 5, 7, 8, 10, 12]
+    const DayMonths30 = [4, 6, 9, 11]
+    const isLeapYear = (sourceYear % 4 === 0 && sourceYear % 100 !== 0) || sourceYear % 400 === 0
+
+    // alert("sourceMonth: " + sourceMonth + "\n" + "isLeapYear: " + isLeapYear + "\n" + "sourceDay: " + sourceDay + "\n" + "DayMonths31: " + DayMonths31 + "\n" + "DayMonths30: " + DayMonths30)
+
+    // if (sourceDay > 31) {
+    //     alert('Please enter a valid day')
+    // } else 
+    if (sourceMonth == 2 && isLeapYear) {
+        if (isNaN(sourceDay) || sourceDay.length < 1 || sourceDay.length > 2  || sourceDay < 1 || sourceDay > 29) {
+            alert('Please enter a valid day')
+            // errorMessage.textContent = ''; // Set a custom error message without using alerts
+            return false
+        }
+    } else if (sourceMonth == 2) {
+        if (isNaN(sourceDay) || sourceDay.length < 1 || sourceDay.length > 2  || sourceDay < 1 || sourceDay > 28) {
+            alert('Please enter a valid day')
+            // errorMessage.textContent = ''; // Set a custom error message without using alerts
+            return false
+        }
+    } else if (DayMonths31.includes(parseInt(sourceMonth))) {
+        if (isNaN(sourceDay) || sourceDay.length < 1 || sourceDay.length > 2  || sourceDay < 1 || sourceDay > 31) {
+            alert('Please enter a valid day')
+            // errorMessage.textContent = ''; // Set a custom error message without using alerts
+            return false
+        }
+    } else if (DayMonths30.includes(parseInt(sourceMonth))) {
+        if (isNaN(sourceDay) || sourceDay.length < 1 || sourceDay.length > 2  || sourceDay < 1 || sourceDay > 30) {
+            alert('Please enter a valid day')
+            // errorMessage.textContent = ''; // Set a custom error message without using alerts
+            return false
+        }
+    }
+
+    // Check for no empty fields
+    if (sourceYear === '' || sourceMonth === '' || sourceDay === '') {
+        alert('Please enter a valid date')
+        return false
+    }
+
+    return true
+}
