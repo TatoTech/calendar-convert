@@ -121,3 +121,29 @@ a {
     font-size: xx-large;
     margin: 0;
 }
+
+/* Message box settings */
+.message-box {
+    display: none;
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%); /* Centers the box horizontally */
+    padding: 15px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+    z-index: 1000;
+    min-width: 200px; /* Optional: ensures minimum width */
+    text-align: center; /* Centers the text inside */
+}
+
+.close-btn {
+    margin-left: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #721c24;
+}

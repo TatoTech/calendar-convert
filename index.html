@@ -17,6 +17,10 @@
         <h1 class="title">Global Calendar Converter</h1>
     </div>
     <div class="content">
+        <div id="messageBox" class="message-box">
+            <span id="messageText"></span>
+            <button class="close-btn" onclick="hideMessage()">&times;</button>
+        </div>
         <form id="validationForm" onsubmit="return validateSourceDate()">
         <!-- <div class="dates"> -->
             <div class="sourceCalendar">
@@ -24,7 +28,7 @@
                     <label for="sourceCalendar" class="calendarLabel">From:</label>
                     <select id="sourceCalendar" name="sourceCalendar" class="calendarDropDown">
                         <option value="Gregorian">Gregorian</option>
-                        <!-- <option value="Jalaali">Jalaali</option> -->
+                        <option value="Jalaali">Jalaali</option>
                         <!-- <option value="Hijri">Hijri</option>
                         <option value="Hebrew">Hebrew</option>
                         <option value="Metric">Metric</option> -->
@@ -41,11 +45,11 @@
                 <div class="calendarSelect">
                     <label for="destinationCalendar" class="calendarLabel">To:</label>
                     <select id="destinationCalendar" name="destinationCalendar" class="calendarDropDown">
-                        <!-- <option value="Gregorian">Gregorian</option> -->
+                        <option value="Gregorian">Gregorian</option>
                         <option value="Jalaali">Jalaali</option>
-                        <option value="Hijri">Hijri</option>
+                        <!-- <option value="Hijri">Hijri</option>
                         <option value="Hebrew">Hebrew</option>
-                        <option value="Metric">Metric</option>
+                        <option value="Metric">Metric</option> -->
                     </select>
                 </div>
                 <div class="dateInput">
@@ -56,7 +60,8 @@
                 </div>
             </div>
             <div class="convert">
-                <button class="convertButton" onclick="startConversion()">Start Conversion</button>
+                <button class="convertButton" onclick="startConversion()">Convert</button>
+                <!-- <button class="convertButton" onclick="">Reverse</button> -->
             </div>
         <!-- </div> -->
         <!-- <div class="dates">

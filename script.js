@@ -24,39 +24,29 @@ function convertDate() {
     document.getElementById('metricDate').innerText = `Metric Date: ${metricDate}`;
 }
 
-// TODO:
-// Use drop down box to select destinaiton (and source) dates
-// Add input validation to date fields
-// Calulate day of the week using date fields. Done
-// Make it so it calculates once all 3 valid have been entered
-// All conversions currently expect input to be gregorian. Fix.
+function convertToGregorian(year, month, day, weekDay) {
+    // Convert the date to Gregorian
+    const gregorianDate = jalaali.toGregorian(year, month - 1, day)
+
+    // Set the values in the destination fields
+    document.getElementById('destinationYear').value = gregorianDate.gy
+    document.getElementById('destinationMonth').value = gregorianDate.gm
+    document.getElementById('destinationDay').value = gregorianDate.gd
+
+    // Set the day of the week
+    const date = new Date(gregorianDate.gy, gregorianDate.gm - 1, gregorianDate.gd)
+    const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    document.getElementById('destinationDayOfTheWeek').value = weekDays[date.getDay()]
+}
 
 function convertToJalaali(year, month, day, weekDay) {
     // Convert the date to Jalaali
-    const jalaaliDate = jalaali.toJalaali(year, month, day)
+    const jalaaliDate = jalaali.toJalaali(year, month + 1, day)
 
     // Set the values in the destination fields
     document.getElementById('destinationYear').value = jalaaliDate.jy
     document.getElementById('destinationMonth').value = jalaaliDate.jm
     document.getElementById('destinationDay').value = jalaaliDate.jd
-
-    //---------------------------------------------------------------
-
-    // // Calculate the Jalaali year
-    // if (month < 3 || (month === 3 && day < 21)) {
-    //     jalaaliYear = year - 622
-    // }
-    // else {
-    //     jalaaliYear = year - 621
-    // }
-
-    // // Calculate the Jalaali month
-    // monthLengths = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29]
-
-    // // Set the values in the destination fields
-    // document.getElementById('destinationYear').value = jalaaliYear
-    // document.getElementById('destinationMonth').value = jalaaliMonth
-    // document.getElementById('destinationDay').value = jalaaliDay
 
     // Set the day of the week
     const weekDays = ['Yekshanbeh', 'Doshanbeh', 'Seshanbeh', 'Chaharshanbeh', 'Panjshanbeh', 'Jomeh', 'Shanbeh']
@@ -117,7 +107,7 @@ function startConversion() {
     // Determine the caldendar to convert to
     switch (selectedCalendar) {
         case "Gregorian":
-            convertToGregorian()
+            convertToGregorian(sourceYear, sourceMonth, sourceDay, weekDay)
             break
         case "Jalaali":
             convertToJalaali(sourceYear, sourceMonth, sourceDay, weekDay)
@@ -149,15 +139,13 @@ function validateSourceDate() {
 
     // Check year is valid
     if (isNaN(sourceYear) || sourceYear.length !== 4) { // Update to allow for years before 1000
-        alert('Please enter a valid year')
-        // errorMessage.textContent = ''; // Set a custom error message without using alerts
+        showMessage('Please enter a valid year')
         return false
     }
 
     // Check month is valid
     if (isNaN(sourceMonth) || sourceMonth.length < 1 || sourceMonth.length > 2  || sourceMonth < 1 || sourceMonth > 12) {
-        alert('Please enter a valid month')
-        // errorMessage.textContent = ''; // Set a custom error message without using alerts
+        showMessage('Please enter a valid month')
         return false
     }
 
@@ -166,42 +154,46 @@ function validateSourceDate() {
     const DayMonths30 = [4, 6, 9, 11]
     const isLeapYear = (sourceYear % 4 === 0 && sourceYear % 100 !== 0) || sourceYear % 400 === 0
 
-    // alert("sourceMonth: " + sourceMonth + "\n" + "isLeapYear: " + isLeapYear + "\n" + "sourceDay: " + sourceDay + "\n" + "DayMonths31: " + DayMonths31 + "\n" + "DayMonths30: " + DayMonths30)
-
-    // if (sourceDay > 31) {
-    //     alert('Please enter a valid day')
-    // } else 
     if (sourceMonth == 2 && isLeapYear) {
         if (isNaN(sourceDay) || sourceDay.length < 1 || sourceDay.length > 2  || sourceDay < 1 || sourceDay > 29) {
-            alert('Please enter a valid day')
-            // errorMessage.textContent = ''; // Set a custom error message without using alerts
+            showMessage('Please enter a valid day')
             return false
         }
     } else if (sourceMonth == 2) {
         if (isNaN(sourceDay) || sourceDay.length < 1 || sourceDay.length > 2  || sourceDay < 1 || sourceDay > 28) {
-            alert('Please enter a valid day')
-            // errorMessage.textContent = ''; // Set a custom error message without using alerts
+            showMessage('Please enter a valid day')
             return false
         }
     } else if (DayMonths31.includes(parseInt(sourceMonth))) {
         if (isNaN(sourceDay) || sourceDay.length < 1 || sourceDay.length > 2  || sourceDay < 1 || sourceDay > 31) {
-            alert('Please enter a valid day')
-            // errorMessage.textContent = ''; // Set a custom error message without using alerts
+            showMessage('Please enter a valid day')
             return false
         }
     } else if (DayMonths30.includes(parseInt(sourceMonth))) {
         if (isNaN(sourceDay) || sourceDay.length < 1 || sourceDay.length > 2  || sourceDay < 1 || sourceDay > 30) {
-            alert('Please enter a valid day')
-            // errorMessage.textContent = ''; // Set a custom error message without using alerts
+            showMessage('Please enter a valid day')
             return false
         }
     }
 
     // Check for no empty fields
     if (sourceYear === '' || sourceMonth === '' || sourceDay === '') {
-        alert('Please enter a valid date')
+        showMessage('Please ensure no fields are empty')
         return false
     }
 
     return true
+}
+
+// Message box settings
+function showMessage(message) {
+    const messageBox = document.getElementById('messageBox');
+    const messageText = document.getElementById('messageText');
+    messageText.textContent = message;
+    messageBox.style.display = 'block';
+    setTimeout(hideMessage, 5000);
+}
+
+function hideMessage() {
+    document.getElementById('messageBox').style.display = 'none';
 }
