@@ -1,32 +1,34 @@
-function convertDate() {
-    const gregorianDate = document.getElementById('gregorianDate').value;
-    // console.log("Var: gregorianDate: " + gregorianDate)
-    const date = new Date(gregorianDate);
-    // console.log(date)
+// function convertDate() {
+//     const gregorianDate = document.getElementById('gregorianDate').value;
+//     // console.log("Var: gregorianDate: " + gregorianDate)
+//     const date = new Date(gregorianDate);
+//     // console.log(date)
 
-    // Convert to Jalaali
-    const jalaaliDate = jalaali.toJalaali(date.getFullYear(), date.getMonth() + 1, date.getDate());
-    // console.log(date.getFullYear(), date.getMonth() + 1, date.getDate())
-    document.getElementById('jalaaliDate').innerText = `Jalaali Date: ${jalaaliDate.jy}/${jalaaliDate.jm}/${jalaaliDate.jd}`;
+//     // Convert to Jalaali
+//     const jalaaliDate = jalaali.toJalaali(date.getFullYear(), date.getMonth() + 1, date.getDate());
+//     // console.log(date.getFullYear(), date.getMonth() + 1, date.getDate())
+//     document.getElementById('jalaaliDate').innerText = `Jalaali Date: ${jalaaliDate.jy}/${jalaaliDate.jm}/${jalaaliDate.jd}`;
 
-    // Convert to Hijri
-    const hijriDate = moment(date).format('iYYYY/iM/iD');
-    document.getElementById('hijriDate').innerText = `Hijri Date: ${hijriDate}`;
+//     // Convert to Hijri
+//     const hijriDate = moment(date).format('iYYYY/iM/iD');
+//     document.getElementById('hijriDate').innerText = `Hijri Date: ${hijriDate}`;
 
-    // Convert to Hebrew
-    const hebrewDate = new Hebcal.HDate(date);
-    document.getElementById('hebrewDate').innerText = `Hebrew Date: ${hebrewDate.getFullYear()}/${hebrewDate.getMonth() + 1}/${hebrewDate.getDate()}`;
+//     // Convert to Hebrew
+//     const hebrewDate = new Hebcal.HDate(date);
+//     document.getElementById('hebrewDate').innerText = `Hebrew Date: ${hebrewDate.getFullYear()}/${hebrewDate.getMonth() + 1}/${hebrewDate.getDate()}`;
 
-    // Convert to Metric
-    const startOfYear = new Date(date.getFullYear(), 0, 1);
-    const dayOfYear = Math.floor((date - startOfYear) / (24 * 60 * 60 * 1000)) + 1;
-    const metricDate = `${date.getFullYear()}.${String(dayOfYear).padStart(3, '0')}`;
-    document.getElementById('metricDate').innerText = `Metric Date: ${metricDate}`;
-}
+//     // Convert to Metric
+//     const startOfYear = new Date(date.getFullYear(), 0, 1);
+//     const dayOfYear = Math.floor((date - startOfYear) / (24 * 60 * 60 * 1000)) + 1;
+//     const metricDate = `${date.getFullYear()}.${String(dayOfYear).padStart(3, '0')}`;
+//     document.getElementById('metricDate').innerText = `Metric Date: ${metricDate}`;
+// }
 
-function convertToGregorian(year, month, day, weekDay) {
+function convertToGregorian(year, month, day) {
     // Convert the date to Gregorian
-    const gregorianDate = jalaali.toGregorian(year, month - 1, day)
+    const gregorianDate = jalaali.toGregorian(year, month, day)
+
+    showMessage(jalaali.isLeapJalaaliYear(year)) //TODO: Figure out leap years and how they work
 
     // Set the values in the destination fields
     document.getElementById('destinationYear').value = gregorianDate.gy
@@ -41,7 +43,7 @@ function convertToGregorian(year, month, day, weekDay) {
 
 function convertToJalaali(year, month, day, weekDay) {
     // Convert the date to Jalaali
-    const jalaaliDate = jalaali.toJalaali(year, month + 1, day)
+    const jalaaliDate = jalaali.toJalaali(year, month, day)
 
     // Set the values in the destination fields
     document.getElementById('destinationYear').value = jalaaliDate.jy
